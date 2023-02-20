@@ -15,6 +15,19 @@ namespace TrilhaApiDesafio.Controllers
             _context = context;
         }
 
+        [HttpPost]
+        public IActionResult Criar(Tarefa tarefa)
+        {
+            if (tarefa.Data == DateTime.MinValue)
+                return BadRequest(new { Erro = "A data da tarefa não pode ser vazia" });
+
+            _context.Add(tarefa);
+            _context.SaveChanges();
+            // TODO: Adicionar a tarefa recebida no EF e salvar as mudanças (save changes)
+            return Ok(tarefa);
+        }
+//CreatedAtAction(nameof(ObterPorId), new { id = tarefa.Id }, tarefa
+/*
         [HttpGet("{id}")]
         public IActionResult ObterPorId(int id)
         {
@@ -55,15 +68,7 @@ namespace TrilhaApiDesafio.Controllers
             return Ok(tarefa);
         }
 
-        [HttpPost]
-        public IActionResult Criar(Tarefa tarefa)
-        {
-            if (tarefa.Data == DateTime.MinValue)
-                return BadRequest(new { Erro = "A data da tarefa não pode ser vazia" });
-
-            // TODO: Adicionar a tarefa recebida no EF e salvar as mudanças (save changes)
-            return CreatedAtAction(nameof(ObterPorId), new { id = tarefa.Id }, tarefa);
-        }
+    
 
         [HttpPut("{id}")]
         public IActionResult Atualizar(int id, Tarefa tarefa)
@@ -91,6 +96,6 @@ namespace TrilhaApiDesafio.Controllers
 
             // TODO: Remover a tarefa encontrada através do EF e salvar as mudanças (save changes)
             return NoContent();
-        }
+        } */
     }
 }
